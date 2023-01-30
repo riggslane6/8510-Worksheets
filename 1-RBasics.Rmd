@@ -300,7 +300,7 @@ Run `help(package="DigitalMethodsData")` in your console to pull up a list of da
 
 For demonstration purposes we'll use the `gayguides` data here. Pull up the help documentation for this package. What is the scope of this dataset? 
 
-<
+<I can't work out the worksheet beyond this point. 
 
 To use a dataset included in this package we first need to load it. We can do so like this:
 
