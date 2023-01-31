@@ -291,7 +291,6 @@ Our class's package is called `DigitalMethodsData` and its hosted on [GitHub](ht
 
 After installing the package, we should load it: 
 ```{r}
-(DigitalMethodsData)
 ```
 
 What kind of datasets are available in this package? We can use the help documentation to find out. 
@@ -300,7 +299,11 @@ Run `help(package="DigitalMethodsData")` in your console to pull up a list of da
 
 For demonstration purposes we'll use the `gayguides` data here. Pull up the help documentation for this package. What is the scope of this dataset? 
 
+<<<<<<< HEAD
 <I'm not able to finish this worksheet. 
+=======
+<I can't work out the worksheet beyond this point. 
+>>>>>>> db2dab202d2ea8be841c87338ed6bb84f2536389
 
 To use a dataset included in this package we first need to load it. We can do so like this:
 
