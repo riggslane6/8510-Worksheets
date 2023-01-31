@@ -21,7 +21,7 @@ R takes inputs and returns an output. So for example, if our input is a number t
 ```{r}
 5
 ```
-Same thing happens if we add a number with a variable. 
+Same thing happens if we use a number with a decimal. 
 ```{r}
 5.5483
 ```
