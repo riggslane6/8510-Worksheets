@@ -291,7 +291,6 @@ Our class's package is called `DigitalMethodsData` and its hosted on [GitHub](ht
 
 After installing the package, we should load it: 
 ```{r}
-head("gayguides")
 ```
 
 What kind of datasets are available in this package? We can use the help documentation to find out. 
@@ -315,65 +314,49 @@ That gives us the first 6 rows of data. Its really useful if you just want to pe
 
 (@) The default is to print six rows of data. Can you modify the above code to print out the first 10 rows? 
 ```{r}
-"gayguides"[1:10]
+
 ```
 
 (@) Can you find the last 6 rows of data? 
 ```{r}
-tail('gayguides', 6)
+
 ```
 
 (@) Reflect on the previous two prompts. How did you figure these out? 
-
-< I had to Google, but you simply ask R to look at the "head" or first couple of entries, or look at the "tail," or the last couple of entries. 
+< 
 
 The `str()` function is another very useful function for understanding a dataset. It compactly displays the internal structure of an R object. 
 ```{r}
-'str'
 ```
 There is a ton of useful info here. First, we see that this is a data.frame and that it has 60698 obs. of  14 variables. Second, we see the names of all the variables (columns) in the dataset. Lastly, it shows us what type of data is contained in each variable. For example, the variable `state` is a chr or character vector while `Year` (note the capitalization) is numeric. 
 
 The `$` operator allows us to get a segment of the data. 
 ```{r}
-"gayguides$title"
 ```
 While that's useful, this particular dataset happens to be sorted by title. So the first rows are all labeled some version of B.A. beach. That's not very useful. What if we want to see the 500th item in this list? Well, we can pull that up like this: 
 ```{r}
-"gayguides$title"[500]
+
 ```
 (@) Break this down. Whats going on here? What do each of the elements of this code mean? (gayguides, $, title, and [500]) 
 
-<Gayguides is the dataset, the $ is the operator that R uses to search the dataset, the title is the entry in the title columns, and the [500] is looking for the 500th entry or value in the dataset.
+<Gayguides is the dataset, the $..., the title is the entry, and the [500] is looking for the 500th entry in the dataset. 
 
 (@) The Year variable contains the year (numeric) of each entry. Can you find the earliest year in this dataset? (Using code, don't cheat and use the documentation!)
 
-min(gayguides$Year)
 
-1965
 
 (@) How about the latest year? 
 
-max(gayguides$Year)
-
-1985
 
 (@) Add another dataset from `DigitalMethodsData`. How many observations are included in this dataset? Run through some of the examples from above to learn about the dataset.
 ```{r}
-data("BostonWomenVoters")
-head(BostonWomenVoters, n=6L)
+
 ```
-data("BostonWomenVoters")
-tail(BostonWomenVoters), n=6L)
-
-max(BostonWomenVoters$Date)
-
-1920-11-24
 
 (@) What did you learn about the dataset? What can you tell me about it? 
+<
 
-<Boston Women Voters has around 10,702 observations of 43 variables. There's information about name, precicnt, occupation, and tons of information about the woman's husband's name, county, court of naturalization, and the woman's father's name, country, county, on and on. It seems wild that there is so much information about the men married to or related to these women. 
+
 
 
 CONGRATS! You've completed your first worksheet for Digital Methods II. That wasn't so bad, right? 
-
-It wasn't! I'm sorry I'm turning this in so late - as you know, dev.tools wasn't working for me until today's class. Thank you for being so helpful!

@@ -1,0 +1,1159 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Worksheet 2: Data Structures},
+  pdfauthor={Amanda Regan},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Worksheet 2: Data Structures}
+\author{Amanda Regan}
+\date{2023-01-05}
+
+\begin{document}
+\maketitle
+
+\emph{This is the second in a series of worksheets for History 8510 at
+Clemson University. The goal of these worksheets is simple: practice,
+practice, practice. The worksheet introduces concepts and techniques and
+includes prompts for you to practice in this interactive document. When
+you are finished, you should change the author name (above), knit your
+document to a pdf, and upload it to canvas.}
+
+\hypertarget{subsetting-loops-control-structures-and-functions}{%
+\subsection{Subsetting, Loops \& Control Structures, and
+Functions}\label{subsetting-loops-control-structures-and-functions}}
+
+\hypertarget{subsetting}{%
+\subsubsection{Subsetting}\label{subsetting}}
+
+Subsetting is the process of retrieving just the parts (a subset) of a
+large vector, list, or data frame. R has numerous operators for
+subsetting information or data structures. They allow you to perform
+complex operations with a small amount of code but can be hard to master
+because subsetting operators (\texttt{{[}{[}}, \texttt{{[}}, and
+\texttt{\$}) interact differently with different vector types.
+
+We'll be talking about vectors throughout the first part of this
+worksheet and it might be useful to refresh our memories about what a
+vector is.
+
+\begin{quote}
+\emph{A vector is a list of variables, and the simplest data structure
+in R. A vector consists of a collection of numbers, arithmetic
+expressions, logical values or character strings for example.}
+\end{quote}
+
+\hypertarget{selecting-multiple-elements}{%
+\paragraph{Selecting Multiple
+Elements}\label{selecting-multiple-elements}}
+
+Lets start by creating a simple vector called x.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{15.4}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{2}\NormalTok{, }\FloatTok{8.35}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{383}\NormalTok{, }\FloatTok{10.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If you type \texttt{x} into your console, you will see that all of the
+values are printed out and preceded by a \texttt{{[}1{]}}. What the
+\texttt{{[}1{]}} refers to is that first number, 15.4. Its position in
+the list is 1. Each number in our list has an index number and that is
+how you retrieve specific positions in this vector.
+
+For example, we can use a positive integer to return elements at
+specific positions. Lets grab the value in the 3rd and 5th position.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 5
+\end{verbatim}
+
+We can also use functions to manipulate our vector. Here we use
+\texttt{order()} to print the values contained in the vector in order.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{order}\NormalTok{(x)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]   2.00   5.00   8.35  10.20  15.40  25.00 383.00
+\end{verbatim}
+
+Duplicate indices will return duplicate values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 2
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\tightlist
+\item
+  Create your own vector and return three values using the subsetting
+  method above.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{91}\NormalTok{)}
+
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 17 45
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 23 91
+\end{verbatim}
+
+Negative integers allow us to exclude values at certain positions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 17 45 91
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  What happened here? Describe this in your own words.
+\end{enumerate}
+
+\begin{quote}
+I think what happened is that the negative integers excluded the first
+and third values, so the numbers we got were the second, fourth, and
+fifth numbers instead.
+\end{quote}
+
+You can use either positive or negative integers to subset a vector but
+you \textbf{cannot mix the two}.
+
+We can assign logical values to each value in a vector and use those to
+subset the data. Logical vectors select elements where the corresponding
+logical value is \texttt{TRUE}. Remember, we created a vector earlier
+and assigned it to x. Now, below, we assign logical values to each of
+the values in that vector. We're doing this by hand here, but you can
+imagine a scenario down the road where you use this technique to apply
+\texttt{TRUE} or \texttt{FALSE} values to a huge dataset dependent on
+some principal. When we run this, only the \texttt{TRUE} values are
+printed out.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#create a vector }
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 23 45
+\end{verbatim}
+
+We can also subset to get values that match a particular criteria.
+Below, each item in the vector is tested against this proposition and it
+returns the values that are \texttt{TRUE}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[x }\SpecialCharTok{\textgreater{}} \DecValTok{7}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 17 23 45 91
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  What is going on in each of the lines above? Describe it in your own
+  words.
+\end{enumerate}
+
+\begin{quote}
+In the above, x value is greater than 7, so running the code looks at
+which values are greater than 7, and those are the numbers that pop up
+in the console.
+\end{quote}
+
+Nothing returns the original vector. This isn't that useful here but can
+come in handy when you have more complex structures like matrices and
+arrays.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 17 23 45 91
+\end{verbatim}
+
+If your vector is named, you can also use character vectors to return
+elements with matching names.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(y }\OtherTok{\textless{}{-}} \FunctionTok{setNames}\NormalTok{(x, letters[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    a    b    c    d <NA> 
+##    5   17   23   45   91
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y[}\FunctionTok{c}\NormalTok{(}\StringTok{"d"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  d 
+## 45
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  What happened here? Explain this in your own words.
+\end{enumerate}
+
+\begin{quote}
+What happened is that letters (a,b,c,d, and NA) are attributed to the
+values. So, in the next line of code, when we ask for ``d,'' we are
+given the value for d, which is 45.
+\end{quote}
+
+\hypertarget{matrices}{%
+\paragraph{Matrices}\label{matrices}}
+
+We can subset higher dimensional structures, like matrices, too. First
+lets define a matrix. In R, \textbf{a matrix} is a collection of
+elements of the same data type (numeric, character, or logical) arranged
+into a fixed number of rows and columns. Since you are only working with
+rows and columns, a matrix is called two dimensional. To create a matrix
+you can use the \texttt{matrix()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9
+\end{verbatim}
+
+In the \texttt{matrix()} function:
+
+\begin{itemize}
+\tightlist
+\item
+  The first argument is the collection of elements that R will arrange
+  into the rows and columns of the matrix. Here, we use 1:9 which is a
+  shortcut for c(1, 2, 3, 4, 5, 6, 7, 8, 9).
+\item
+  The argument byrow indicates that the matrix is filled by the rows. If
+  we want the matrix to be filled by the columns, we just place byrow =
+  FALSE.
+\item
+  The third argument nrow indicates that the matrix should have three
+  rows.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  You try now, create a matrix that had five rows with numbers that
+  range from 25 to 49.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{matrix}\NormalTok{(}\DecValTok{25}\SpecialCharTok{:}\DecValTok{49}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]   25   26   27   28   29
+## [2,]   30   31   32   33   34
+## [3,]   35   36   37   38   39
+## [4,]   40   41   42   43   44
+## [5,]   45   46   47   48   49
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Can you create a matrix that has 3 rows with only even numbers from 2
+  to 18?
+\end{enumerate}
+
+\hypertarget{subsetting-matricies}{%
+\subparagraph{Subsetting Matricies}\label{subsetting-matricies}}
+
+The most common way to subset matrices and arrays is to use a simple
+generalization of the same subsetting method we used for vectors above.
+We can subset by supplying index for each dimension separated by a
+comma. So it looks like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow=}\DecValTok{3}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(a) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"C"}\NormalTok{)}
+\NormalTok{a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      A B C
+## [1,] 1 4 7
+## [2,] 2 5 8
+## [3,] 3 6 9
+\end{verbatim}
+
+Here is our matrix. Its similar to the one we used above except I named
+each column using the \texttt{colnames()} function.
+
+So to subset this matrix and get just the first two rows I can do:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      A B C
+## [1,] 1 4 7
+## [2,] 2 5 8
+\end{verbatim}
+
+If I want to get the first two columns, I can do:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      A B
+## [1,] 1 4
+## [2,] 2 5
+## [3,] 3 6
+\end{verbatim}
+
+I could also exclude a column:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a[,}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      A C
+## [1,] 1 7
+## [2,] 2 8
+## [3,] 3 9
+\end{verbatim}
+
+Or get just one single value from the matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a[}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## C 
+## 8
+\end{verbatim}
+
+These skills are important because dataframes have the characteristics
+of both lists and matricies.
+
+So lets load the Gay guides data from our class pacakge.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(DigitalMethodsData)}
+\FunctionTok{data}\NormalTok{(}\StringTok{"gayguides"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+To subset this data we could pull two particular columns like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#gayguides[2:3]}
+\end{Highlighting}
+\end{Shaded}
+
+That returns columns 2 and 3 (including every single row!).
+
+If we use two indices it'll behave more like a matrix.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gayguides[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   X   ID        title        description streetaddress           type
+## 1 1 3213       'B.A.'    (woods & ponds)               Cruising Areas
+## 2 2 2265 'B.A.' Beach           2 mi. E.        Rte. 2 Cruising Areas
+## 3 3 3269 'B.A.' Beach nr. Salt Air Beach               Cruising Areas
+##   amenityfeatures           city state Year notes      lat        lon
+## 1     Cruisy Area    Lake Placid    NY 1982       44.27949  -73.97987
+## 2     Cruisy Area           Troy    NY 1981       42.72841  -73.69178
+## 3     Cruisy Area Salt Lake City    UT 1981       40.74781 -112.18727
+##                                                                       status
+## 1 Location could not be verified. General city or location coordinates used.
+## 2 Location could not be verified. General city or location coordinates used.
+## 3 Location could not be verified. General city or location coordinates used.
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Why is this different? What do we get compared to the previous
+  example?
+\end{enumerate}
+
+\begin{quote}
+\end{quote}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{7}
+\item
+  Can you find just the city and state for the first 5 entries?
+\item
+  How about the street address and type for rows 2,555 to 2,560?
+\item
+  Load another dataset from \texttt{DigitalMethodsData}. Subset it to
+  find some element of the data. Write the code below and then explain
+  what element of the data you wanted to subset and why:
+\end{enumerate}
+
+\begin{quote}
+\end{quote}
+
+Another useful operator to know is \texttt{\$} which we used a little
+bit in the previous worksheet. \texttt{\$} is shorthand for accessing a
+variable in a dataframe.
+
+So for example both of these produce the same result. One is just easier
+to type. Because the output here is so large, I've commented these two
+lines out. Uncomment them and the run the block.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#gayguides["title"]}
+\CommentTok{\#gayguides$title}
+\end{Highlighting}
+\end{Shaded}
+
+Notice the above output is \emph{huge}. We can combine \texttt{\$} and
+\texttt{{[}} to drill down more specifically like we did earlier.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gayguides}\SpecialCharTok{$}\NormalTok{city[}\DecValTok{100}\SpecialCharTok{:}\DecValTok{110}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "San Diego"     "Laguna Beach"  "San Diego"     "Sioux Falls"  
+##  [5] "Buffalo"       "Long Beach"    "Tucson"        "Oceanside"    
+##  [9] "Santa Barbara" "Buffalo"       "Washington"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  What does this code do?
+\end{enumerate}
+
+\begin{quote}
+\end{quote}
+
+We can also use \texttt{\$} to create a new column in
+\texttt{gayguides}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gayguides}\SpecialCharTok{$}\NormalTok{mynewcolumn }\OtherTok{\textless{}{-}} \ConstantTok{TRUE}
+\NormalTok{gayguides}\SpecialCharTok{$}\NormalTok{mynewcolumn[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+\end{verbatim}
+
+What does this code do? It creates a new column in the gayguides data
+called \texttt{mynewcolumn} and it assigns \texttt{TRUE} to every row
+(all 60k). This is a bit of a unrealistic example. You probably won't
+want to add the same value to 60k+ rows but the concept here is useful
+and we'll use it later in this worksheet.
+
+\hypertarget{control-structures-loops-choices}{%
+\subsubsection{Control Structures: Loops \&
+Choices}\label{control-structures-loops-choices}}
+
+Loops and control structures can be indispensable tools when writing a
+script that does something for you. For example, maybe you want to write
+a script that goes out to a website, grabs a primary source, downloads
+it, and saves it to a file then repeats that hundreds of times until you
+have a set of primary sources. To write that kind of script you'd need
+loops and control structures to tell your program when to start, stop,
+and move to the next source.
+
+Loops and control structures are one of those programming patterns that
+appear in almost every language. The syntax and style change, but the
+core idea doesn't. This is a concept I'd recommend you master and it'll
+come in handy for years to come.
+
+\textbf{Choices} and \textbf{loops} are both known as types of
+\textbf{control structures.}
+
+Choices, like \texttt{if}, allow you to run different code depending on
+the input.
+
+Loops, like \texttt{for} and \texttt{while} allow you to repeatedly run
+code, typically with changing options.
+
+Lets start with choices.
+
+\hypertarget{choices}{%
+\paragraph{Choices}\label{choices}}
+
+The most important choice statement in R is an \texttt{if} statement.
+
+An \texttt{if} statement allows you to check the condition of something
+and then determine what should be done based on that input.
+
+The basic format is this:
+
+\begin{verbatim}
+if (condition) true_action 
+#OR
+if(condition) true_action else false action 
+\end{verbatim}
+
+And it works like this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\DecValTok{2} \SpecialCharTok{\textless{}} \DecValTok{3}\NormalTok{) }\FunctionTok{print}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\DecValTok{3} \SpecialCharTok{\textless{}} \DecValTok{2}\NormalTok{) }\FunctionTok{print}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The first example above works. Why? Because 2 is indeed less than 3. The
+second line has no output. Why? Becuase the conditions weren't met. 3 is
+not less than 2 and so it didn't print anything out. But we could ask it
+to do something else instead:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\DecValTok{3} \SpecialCharTok{\textless{}} \DecValTok{2}\NormalTok{) }\FunctionTok{print}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{) }\ControlFlowTok{else} \FunctionTok{print}\NormalTok{(}\StringTok{"This is clearly false."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "This is clearly false."
+\end{verbatim}
+
+Most often, if statements are more complex (known as compound
+statements) and so they use brackets like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{71}
+\ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{\textgreater{}} \DecValTok{90}\NormalTok{) \{}
+  \StringTok{"A"}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{\textgreater{}} \DecValTok{50}\NormalTok{) \{}
+  \StringTok{"C"}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \StringTok{"F"}
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "C"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{11}
+\item
+  You are teaching History 100 for Clemson. Write an \texttt{if}
+  statement that calculates whether the enrollment cap of 30 on your
+  class has been met.
+\item
+  Create a list of presidents and store it in a variable. Use an
+  \texttt{if} statement to check if the number of presidents in the list
+  is more than 5. If its not indicate that too.
+\item
+  You can also use an if statement to check a variable in a dataframe.
+  How might you use an if statement to check if the GayGuides dataset
+  contains any year after 1990? (Hint: first try to figure out how to
+  determine the latest year in the dataframe and then build an if
+  statement that checks that and prints something out if its true or
+  false. You should think about what kind of value in contained in the
+  Year column, how to access it, and how to check for the latest value.)
+\item
+  Reflect on the question above. How did you figure this out? What was
+  the process you went through to build this chunk of code?
+\end{enumerate}
+
+\begin{quote}
+\end{quote}
+
+\hypertarget{loops}{%
+\paragraph{Loops}\label{loops}}
+
+A **loop* is used to iterate over items in a vector. They typically
+follow this form:
+
+\begin{verbatim}
+for (item in vector) perform_action
+\end{verbatim}
+
+For each item in the vector, perform\_action is called once and the
+value of the item is updated each time.
+
+For example,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(i)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+## [1] 2
+## [1] 3
+\end{verbatim}
+
+What does this loop do? \texttt{1:3} is shorthand for 1, 2, 3. Run it in
+your terminal to see its output. This code says, for every number in the
+range 1:3, print the number.
+
+We could do this with character vectors too.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{presidents }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"George Washington"}\NormalTok{, }\StringTok{"John Adams"}\NormalTok{, }\StringTok{"Thomas Jefferson"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (p }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(presidents)) \{}
+  \FunctionTok{print}\NormalTok{(presidents[p])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "George Washington"
+## [1] "John Adams"
+## [1] "Thomas Jefferson"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{15}
+\tightlist
+\item
+  Why does this work? What does \texttt{length()} do and why do we use
+  it on \texttt{presidents}?
+\end{enumerate}
+
+\begin{quote}
+\end{quote}
+
+Create a character vector that contains the title of each of your
+classes this semester. Can you write a \texttt{for} loop that prints out
+``I am enrolled in'' and the name of each of your classes? (``I am
+enrolled in History 8150'', ``I am enrolled in History
+8000''\ldots..etc). Hint: you'll need a function to combine the output
+and some text of your choosing inside the function.
+
+Sometimes we want our loop to terminate itself early. There are two
+statements that help us do that:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{next} exits the current iteration
+\item
+  \texttt{break} exits the entire for loop
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{) \{}
+  \ControlFlowTok{if}\NormalTok{ (i }\SpecialCharTok{\textless{}} \DecValTok{3}\NormalTok{)}
+    \ControlFlowTok{next}
+  
+  \FunctionTok{print}\NormalTok{ (i)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10
+\end{verbatim}
+
+\texttt{Next} skips values until the criteria is met. So in the above
+example it skips numbers 1 and 2 because they don't match the criteria.
+But in some cases we may not want to skip the entries but rather exit
+the loop entirely. Something like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{) \{}
+  \ControlFlowTok{if}\NormalTok{ (i }\SpecialCharTok{\textless{}} \DecValTok{3}\NormalTok{)}
+    \ControlFlowTok{next}
+  
+  \ControlFlowTok{if}\NormalTok{ (i }\SpecialCharTok{\textgreater{}=} \DecValTok{5}\NormalTok{)}
+    \ControlFlowTok{break}
+  
+  \FunctionTok{print}\NormalTok{ (i)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+## [1] 4
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{16}
+\item
+  What happened here? Why did the loop only print 3 and 4?
+\item
+  In the state population data, can you write a loop that pulls only
+  states with populations between 200,000 and 250,000 in 1800? You could
+  accomplish this a few different ways. Try to use next and break
+  statements.
+\item
+  What if we wanted to loop through the gay guides data? Can you write a
+  loop that iterates through the cities in the Gay Guides data and
+  returns the title of any location in Greenville?
+\end{enumerate}
+
+\texttt{while} is another useful tool for writing loops. While will run
+a loop \emph{while} a condition is true. Once that condition is not
+true, it exits. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{i }\OtherTok{\textless{}{-}} \DecValTok{1}
+\ControlFlowTok{while}\NormalTok{ (i }\SpecialCharTok{\textless{}} \DecValTok{6}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(i)}
+\NormalTok{  i }\OtherTok{\textless{}{-}}\NormalTok{ i}\SpecialCharTok{+}\DecValTok{1}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+\end{verbatim}
+
+Its important to note here that \texttt{i} is defined outside the loop.
+Its initial value is 1 but each time the loop runs it gets 1 added to
+it. So the first time it runs, i = 1 and the loop prints the value then
+adds 1 to i. Now i = 2 but since that is still less than 6 the loop
+continues and prints the value then adds 1 to i. Eventually, i=6 and
+since 6 is not less than 6 the loop exits without printing.
+
+\texttt{While} doesn't get used as often in R because there is often a
+more efficient way to do the same thing. But in other languages
+\texttt{while} gets used much more often. Its a good pattern to be
+familiar with even if you don't use in frequently in R.
+
+\hypertarget{functions}{%
+\subsection{Functions}\label{functions}}
+
+A \textbf{function} is a set of statements that are organized together
+to perform a specific task. You've already been using functions because
+R has a number of built in functions that are available to users. For
+example. \texttt{print()} is a function.
+
+To be more specific, a \textbf{function} is a set of code that performs
+a task and returns a result. As you advance your programming skills
+you'll probably have certain tasks that you perform frequently. Once
+you've run a chunk of code several times its good practice to turn it
+into a function so it can be repeatedly used.
+
+A function in R takes any arguments that may be necessary to perform the
+actions contained within the function, performs those functions, and
+then returns any result in the console.
+
+For example, the below function takes a number as an input, multiplies
+it by 5 and then returns the result.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myfunction }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(y)\{}
+\NormalTok{  myvalue }\OtherTok{\textless{}{-}}\NormalTok{ y }\SpecialCharTok{*} \DecValTok{5}
+  \FunctionTok{print}\NormalTok{(myvalue)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+When you run this nothing is returned. Why? You've loaded the function
+but you haven't called it yet. We can do that like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{myfunction}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 25
+\end{verbatim}
+
+You'll notice that the variable we created inside the function,
+\texttt{myvalue}, doesn't show up. Unless we write code asking R to
+return the value of that variable, it'll run invisibly in the background
+and only give us back the result we ask for. This comes in handy when
+you are writing more complex functions and need to store bits of data
+temporarily for a calculation that is being run by the function.
+
+Here's another example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{historyStudents }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(studentname, class) \{}
+\NormalTok{  statement }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"Hello "}\NormalTok{, studentname, }\StringTok{". Welcome to "}\NormalTok{, class, }\StringTok{"!"}\NormalTok{, }\AttributeTok{sept=}\StringTok{""}\NormalTok{)}
+\NormalTok{  statement}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{19}
+\tightlist
+\item
+  Can you run this function?
+\end{enumerate}
+
+There are several components to a function.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Function Name}:This is the actual name of the function. It is
+  stored in R environment as an object with this name. In the above
+  example, the function name is \texttt{historyStudents}
+\item
+  \textbf{Arguments}: An argument is a placeholder. When a function is
+  invoked, you pass a value to the argument. Arguments are optional;
+  that is, a function may contain no arguments. Also arguments can have
+  default values. In the example above, the function takes two
+  arguments: a student's name and the name of a class.
+\item
+  \textbf{Function Body}: The function body contains a collection of
+  statements that defines what the function does. In the above example
+  the function body is the code inside the \texttt{\{} and \texttt{\}}
+  brackets.
+\item
+  \textbf{Return Value}: The return value of a function is the last
+  expression in the function body to be evaluated. In the above example,
+  our return value is \texttt{statement} which prints our welcome
+  statement using the names we provided in the arguments.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{20}
+\item
+  Write a function that takes a string of text and counts the number of
+  characters. The function should return ``There are xx characters in
+  that string.''
+\item
+  Reflect on the process of building the above function. How did you go
+  about figuring this out?
+\end{enumerate}
+
+\begin{quote}
+\end{quote}
+
+The body of a functions can use any of the techniques we've learned in
+this worksheet like loops and if statements. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grade }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+  \ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{\textgreater{}} \DecValTok{90}\NormalTok{) \{}
+  \StringTok{"A"}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{\textgreater{}} \DecValTok{50}\NormalTok{) \{}
+  \StringTok{"C"}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \StringTok{"F"}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+
+\FunctionTok{grade}\NormalTok{(}\DecValTok{85}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "C"
+\end{verbatim}
+
+We could run this function as many times as we want.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grade}\NormalTok{(}\DecValTok{95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "A"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grade}\NormalTok{(}\DecValTok{75}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "C"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{22}
+\tightlist
+\item
+  In the example below, why doesn't George Washington's grade get
+  printed out?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{GeorgeWashington }\OtherTok{\textless{}{-}} \FunctionTok{grade}\NormalTok{(}\DecValTok{60}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\end{quote}
+
+Here's a more complex example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gg.locations }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{ (city, year) \{}
+  \FunctionTok{data}\NormalTok{(gayguides)}
+
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(gayguides}\SpecialCharTok{$}\NormalTok{city)) \{}
+    \ControlFlowTok{if}\NormalTok{ (gayguides}\SpecialCharTok{$}\NormalTok{city[i] }\SpecialCharTok{==}\NormalTok{ city }\SpecialCharTok{\&\&}\NormalTok{ gayguides}\SpecialCharTok{$}\NormalTok{Year[i] }\SpecialCharTok{==}\NormalTok{ year) \{}
+     \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Found a location called "}\NormalTok{, gayguides}\SpecialCharTok{$}\NormalTok{title[i]))}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+      \ControlFlowTok{next} 
+\NormalTok{    \} }
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{23}
+\item
+  Write a function that uses the things you've learned in this
+  worksheet. The function should accept two arguments, city and year. It
+  should pull all the locations in that city and year and return a
+  statement that says ``Found a location called xxx''. (Where x is the
+  title of a location in that year and city.)
+\item
+  Use the Boston Women Voter dataset. Write a function that accepts the
+  name of an occupation. Your function should return new dataframe that
+  includes the records for every voter listed with that occupation.
+\end{enumerate}
+
+\end{document}

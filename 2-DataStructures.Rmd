@@ -42,7 +42,11 @@ x[c(3,3)]
 ```
 (@) Create your own vector and return three values using the subsetting method above. 
 ```{r}
+x <- c(5, 17, 23, 45, 91)
 
+x[c(2,4)]
+
+x[c(1,3,5)]
 ```
 
 
@@ -53,7 +57,7 @@ x[-c(3, 1)]
 
 (@) What happened here? Describe this in your own words. 
 
->
+>I think what happened is that the negative integers excluded the first and third values, so the numbers we got were the second, fourth, and fifth numbers instead. 
 
 You can use either positive or negative integers to subset a vector but you **cannot mix the two**.
 
@@ -70,7 +74,7 @@ x[x > 7]
 
 (@) What is going on in each of the lines above? Describe it in your own words. 
 
->
+>In the above, x value is greater than 7, so running the code looks at which values are greater than 7, and those are the numbers that pop up in the console. 
 
 Nothing returns the original vector. This isn't that useful here but can come in handy when you have more complex structures like matrices and arrays. 
 ```{r}
@@ -83,6 +87,8 @@ If your vector is named, you can also use character vectors to return elements w
 y[c("d")]
 ```
 (@) What happened here? Explain this in your own words. 
+
+>What happened is that letters (a,b,c,d, and NA) are attributed to the values. So, in the next line of code, when we ask for "d," we are given the value for d, which is 45. 
 
 #### Matrices
 
@@ -99,11 +105,14 @@ In the `matrix()` function:
 
 (@) You try now, create a matrix that had five rows with numbers that range from 25 to 49. 
 ```{r}
-
+matrix(25:49, byrow = TRUE, nrow = 5)
 ```
 
 (@) Can you create a matrix that has 3 rows with only even numbers from 2 to 18? 
 ```{r}
+matrix(2:18, byrow = FALSE, nrow = 3, ncol = 3)
+
+seq(2,18,2)
 
 ```
 
@@ -143,7 +152,7 @@ data("gayguides")
 
 To subset this data we could pull two particular columns like this: 
 ```{r}
-#gayguides[2:3]
+gayguides[2:3]
 ```
 That returns columns 2 and 3 (including every single row!). 
 
@@ -154,11 +163,11 @@ gayguides[1:3,]
 
 (@) Why is this different? What do we get compared to the previous example? 
 
->
+>It seems like, with the first, we get every single entry in the second and third columns of the gay guides dataset. In the second example, we only get the first three entries in a column. 
 
 (@) Can you find just the city and state for the first 5 entries? 
 ```{r}
-
+gayguides[,8:5]
 ```
 
 (@) How about the street address and type for rows 2,555 to 2,560?
