@@ -2,7 +2,9 @@
 title: 'Worksheet 2: Data Structures'
 author: "Amanda Regan"
 date: "2023-01-05"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 _This is the second in a series of worksheets for History 8510 at Clemson University. The goal of these worksheets is simple: practice, practice, practice. The worksheet introduces concepts and techniques and includes prompts for you to practice in this interactive document. When you are finished, you should change the author name (above), knit your document to a pdf, and upload it to canvas._
@@ -110,12 +112,9 @@ matrix(25:49, byrow = TRUE, nrow = 5)
 
 (@) Can you create a matrix that has 3 rows with only even numbers from 2 to 18? 
 ```{r}
-matrix(2:18, byrow = FALSE, nrow = 3, ncol = 3)
-
-seq(2,18,2)
+matrix(seq(2,18,2), byrow = TRUE, nrow = 3)
 
 ```
-
 ##### Subsetting Matricies 
 
 The most common way to subset matrices and arrays is to use a simple generalization of the same subsetting method we used for vectors above. We can subset by supplying index for each dimension separated by a comma. So it looks like this: 
@@ -167,28 +166,33 @@ gayguides[1:3,]
 
 (@) Can you find just the city and state for the first 5 entries? 
 ```{r}
-gayguides[,8:5]
+gayguides[1:5, 8:9]
 ```
 
 (@) How about the street address and type for rows 2,555 to 2,560?
 
 ```{r}
-
+gayguides[2555:2560, 5:6]
 ```
 
 (@) Load another dataset from `DigitalMethodsData`. Subset it to find some element of the data. Write the code below and then explain what element of the data you wanted to subset and why:
 ```{r}
+library(DigitalMethodsData)
+
+data("BostonWomenVoters")
+
+BostonWomenVoters[1:5,4:7]
 
 ```
 
-> 
+> I wanted to look at information in the Boston Women's Voter dataset, and I wanted to specifically look at the first five entries and the corresponding dates and names that go with those entries.
 
 Another useful operator to know is `$` which we used a little bit in the previous worksheet. `$` is shorthand for accessing a variable in a dataframe. 
  
 So for example both of these produce the same result. One is just easier to type. Because the output here is so large, I've commented these two lines out. Uncomment them and the run the block.
 ```{r R.options=list(max.print=10)}
-#gayguides["title"]
-#gayguides$title
+gayguides["title"]
+gayguides$title
 ```
 
 Notice the above output is _huge_. We can combine `$` and `[` to drill down more specifically like we did earlier.
@@ -198,7 +202,7 @@ gayguides$city[100:110]
 
 (@) What does this code do? 
 
->
+>It specifies the variable instead of the column, so it returns the different variables instead of every single column. 
 
 
 We can also use `$` to create a new column in `gayguides`. 
@@ -261,22 +265,34 @@ if (x > 90) {
 
 (@) You are teaching History 100 for Clemson. Write an `if` statement that calculates whether the enrollment cap of 30 on your class has been met. 
 ```{r}
-
+x <- 29
+if (x == 30) {
+  print("too many")
+} else if (x < 30) {
+  print("justright")
+} 
 ```
 
-(@) Create a list of presidents and store it in a variable. Use an `if` statement to check if the number of presidents in the list is more than 5. If its not indicate that too. 
+(@) Create a list of presidents and store it in a variable. Use an if statement to check if the number of presidents in the list is more than 5. If its not indicate that too. 
 ```{r}
+presidents <- c("Bush", "Clinton", "Obama","Trump","Biden")
 
+if (length(presidents) > 5){
+  print(TRUE)
+} else if (length(presidents) == 3) {
+    print(FALSE)
+}
 ```
 
 (@) You can also use an if statement to check a variable in a dataframe. How might you use an if statement to check if the GayGuides dataset contains any year after 1990? (Hint: first try to figure out how to determine the latest year in the dataframe and then build an if statement that checks that and prints something out if its true or false. You should think about what kind of value in contained in the Year column, how to access it, and how to check for the latest value.) 
 
 ```{r}
+if(max(gayguides$Year) > 1990) print(TRUE) else print(FALSE)
 ```
 
 (@) Reflect on the question above. How did you figure this out? What was the process you went through to build this chunk of code?
 
-> 
+> I put that it should reflect any year that is greater than 1990, and print an if statement that reflects whether or not that's true. 
 
 #### Loops
 
@@ -308,11 +324,16 @@ for (p in 1:length(presidents)) {
 
 (@) Why does this work? What does `length()` do and why do we use it on `presidents`?
 
-> 
+> Length looks at how many variables are in a value, and we can use it on the list of presidents to see how many values are in that list or dataset. 
 
 Create a character vector that contains the title of each of your classes this semester. Can you write a `for` loop that prints out "I am enrolled in" and the name of each of your classes? ("I am enrolled in History 8150", "I am enrolled in History 8000".....etc). Hint: you'll need a function to combine the output and some text of your choosing inside the function. 
 
 ```{r}
+lastsemester <- (c("DigitalHistories", "Studios"))
+
+for (c in 1:length(lastsemester)){
+  print(paste("I'm enrolled in", lastsemester[c]))
+}
 
 ```
 
@@ -345,15 +366,29 @@ for (i in 1:10) {
 
 (@) What happened here? Why did the loop only print 3 and 4? 
 
+>Because we asked it to skip numbers that are less than 3 and 4, and breaks if the number is greater than 5. So it only returned 3 and 4. 
 
 (@) In the state population data, can you write a loop that pulls only states with populations between 200,000 and 250,000 in 1800? You could accomplish this a few different ways. Try to use next and break statements. 
-```{r}
-
+```{r 373, message=TRUE, warning=TRUE}
+data("statepopulations")
+for (i in 1:length(statepopulations$X1800)){
+  if (is.na(statepopulations$X1800[i])){
+    next
+  }
+  else if (statepopulations$X1800[i] >= 200000 & statepopulations$X1800[i] <= 250000){
+    print(statepopulations$STATE[i])
+  }
+}
 ```
 
 (@) What if we wanted to loop through the gay guides data? Can you write a loop that iterates through the cities in the Gay Guides data and returns the title of any location in Greenville? 
 ```{r}
+i <- 1
 
+for (i in 1:length(gayguides$city)){
+  if (gayguides$city[i] == "Greenville")
+    print(gayguides$title[i])
+}
 ```
 
 `while` is another useful tool for writing loops. While will run a loop _while_ a condition is true. Once that condition is not true, it exits. For example: 
@@ -399,7 +434,7 @@ historyStudents <- function(studentname, class) {
 ```
 (@) Can you run this function? 
 ```{r}
-
+historyStudents("Lane", "Digital Methods for History")
 ```
 
 
@@ -412,12 +447,18 @@ There are several components to a function.
 
 (@) Write a function that takes a string of text and counts the number of characters. The function should return "There are xx characters in that string." 
 ```{r}
+weekend <- "I had a good weekend"
 
+answer <- function(x){
+  statement <- paste("There are", nchar(x), "characters in this string")
+  statement
+}
+answer(weekend)
 ```
 
 (@) Reflect on the process of building the above function. How did you go about figuring this out? 
 
->
+>I asked the code to look at my statement and count how many characters are in the string with the nchar line. Then it spit back out how many letters were in the function. 
 
 The body of a functions can use any of the techniques we've learned in this worksheet like loops and if statements. For example: 
 ```{r}
@@ -445,7 +486,7 @@ grade(75)
 GeorgeWashington <- grade(60)
 ```
 
->
+>It has been assigned as a value, but not as a return statement. So it represents itself as a value but can't post like above since we don't have the return statement. 
 
 
 Here's a more complex example: 
@@ -465,11 +506,32 @@ gg.locations <- function (city, year) {
 
 (@) Write a function that uses the things you've learned in this worksheet. The function should accept two arguments, city and year. It should pull all the locations in that city and year and return a statement that says "Found a location called xxx". (Where x is the title of a location in that year and city.) 
 ```{r}
-
+locategaysite <- function(city, year){
+  data("gayguides")
+  for (i in 1:length(gayguides$city)) {
+    if (gayguides$city[i] == city && gayguides$Year[i] == year){
+      print(paste("Found a location called", gayguides$title[i]))
+    } else {
+      next
+    }
+  }
+}
+gg.locations("Austin", 1985)
 ```
+>I could not get the above to run. It says I need true/false? 
 
 (@) Use the Boston Women Voter dataset. Write a function that accepts the name of an occupation. Your function should return new dataframe that includes the records for every voter listed with that occupation.  
 ```{r}
+bostonvoters <- function(occupation){
+  for(i in 1:length(BostonWomenVoters$Occupation)){
+    if(BostonWomenVoters$Occupation[i] == occupation){
+      print(BostonWomenVoters[i, ])
+} else {
+  next
+   }
+  }
+}
 
+bostonvoters("Wig maker")
 ```
 
