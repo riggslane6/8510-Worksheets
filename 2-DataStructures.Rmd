@@ -380,6 +380,7 @@ for (i in 1:length(statepopulations$X1800)){
   }
 }
 ```
+> I had to turn to Stack Overflow for help with this one! 
 
 (@) What if we wanted to loop through the gay guides data? Can you write a loop that iterates through the cities in the Gay Guides data and returns the title of any location in Greenville? 
 ```{r}
@@ -523,15 +524,17 @@ gg.locations("Austin", 1985)
 (@) Use the Boston Women Voter dataset. Write a function that accepts the name of an occupation. Your function should return new dataframe that includes the records for every voter listed with that occupation.  
 ```{r}
 bostonvoters <- function(occupation){
+  bostonvoters.byoccupation <- data.frame()
   for(i in 1:length(BostonWomenVoters$Occupation)){
     if(BostonWomenVoters$Occupation[i] == occupation){
-      print(BostonWomenVoters[i, ])
+      bostonvoters.byoccupation <- rbind(bostonvoters.byoccupation, BostonWomenVoters[i,])
 } else {
   next
    }
   }
+  return(bostonvoters.byoccupation)
 }
 
-bostonvoters("Wig maker")
+bostonvoters("Housewife")
 ```
 
