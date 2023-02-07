@@ -518,7 +518,6 @@ locategaysite <- function(city, year){
 }
 gg.locations("Austin", 1985)
 ```
->I could not get the above to run. It says I need true/false? 
 
 (@) Use the Boston Women Voter dataset. Write a function that accepts the name of an occupation. Your function should return new dataframe that includes the records for every voter listed with that occupation.  
 ```{r}
