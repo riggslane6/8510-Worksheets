@@ -536,4 +536,4 @@ bostonvoters <- function(occupation){
 
 bostonvoters("Housewife")
 ```
-
+> I wanted to edit this to give thanks to the helpful souls at Stack Overflow, and to David and Justin who helped me see when I was on the right track ... but needed a little editing. 
