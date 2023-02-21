@@ -248,14 +248,38 @@ head(almshouse_admissions)
 (@) Below I've downloaded data about each of the census regions. Join this dataset with `gayguides`. Create a data frame that includes each of the regions and the total number of locations in 1980. How many locations appear in the Mountain region in 1980?
 ```{r}
 regions <- read.csv("https://raw.githubusercontent.com/regan008/DigitalMethodsData/main/raw/censusregions.csv")
+
+gayguides.locations <- left_join(gayguides, regions, by =c("state" ="State.Code"))
+
+gayguides.locations %>%
+  select(Year, Division) %>%
+  filter(Year == 1980) %>%
+  group_by(Division) %>%
+  summarize(count = n())
 ```
 
+
 (@) Explain what you did above. What variable did you join by and why? What results?
+
+>I had to create a new frame with the gayguides data and the regions data, which I called "gayguides.locations." Since the state column is pretty much the same information as the State.Code column, I joined those two columns together with the left join. With this new data frame, I selected the year (1980) and then filtered results from that year. (This next part was tricky.) The Division column shows the locale of the regions, so I had to filter for information from 1980 from the particular Division. Lastly, I asked R to summarize from the new column and show me how many locations are in each Division. With the following data I could see that there were 285 locations in the mountain region. 
+
 
 (@)How much did LGTBQ life grow between 1970 and 1980? Can you create a data frame that computes the growth in the number of locations between 1970 and 1980 for every state? For every region? 
 ```{r}
 
+gayguides.increase <- gayguides
+
+gayguides.increases <- gayguides.locations
+
+gayguides.increases %>%
+  select(state, Year, Division) %>%
+  filter(Year == 1970 | Year == 1980) %>%
+  group_by(state, Year, Division) %>%
+  summarize(count = n())
+
 ```
+
+> I can get it to show me the information for 1970 and 1980, but I can't figure out how to get it to show me growth between those years. Help!! 
 
 
 ### `pivot_longer()` and `pivot_wider()`: Converting Wide and Long Data
