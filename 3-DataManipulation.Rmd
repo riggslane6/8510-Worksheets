@@ -3,6 +3,7 @@ title: 'Worksheet 3: Data Manipulation'
 author: "Lane Riggs"
 date: "2023-02-21"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 ---
@@ -113,9 +114,9 @@ gayguides %>%
 ```
 
 (@) The amenity features column in gay guides contains a comma separated list of categorizations. (G), for example, stands for girls. However, this language changed over time and women's locations eventually are described as (L). What if we want to filter by any entry that has (G) OR (L) in the amenity feature column?  This is a bit more complicated because the entries are a comma separated list and (G) or (L) is often paired with other categorizations. How might you _search the dataframe for entries that match_ (G) or (L)?
-```{r}
-gayguides %>%
-  filter('(G) | (L)', amenityfeatures)
+
+```{r message=TRUE, warning=TRUE}
+
 ```
 
 ### Mutate
@@ -321,13 +322,8 @@ sc.parks %>%
 ```
 
 (@) Turn `rec.spaces` into a wide dataframe. 
-```{r}
 
-rec.spaces %>%
-  pivot_wider(names_from = type, values_from = count)
-
-```
-
+>I could not get this to knit. I think that may be why the link wasn't working. 
 
 ## Putting it all together
 Each of the functions covered in this worksheet are valuable tools for manipulating datasets. But they are more powerful when combined. When using them to pair down a dataset, we are asking and answering a question. For example in this code from earlier in our worksheet:
@@ -345,18 +341,23 @@ The implicit question was, "How many locations appear in each year?". The `judge
 data("judges")
 
 ```
-> How many women have served in the U.S. District Courts since 1970? 
+> How many women of color have served in the U.S. District Courts since 1970? 
 
 
 (@) Now write some code to address that question. Comment the code with notes that explain your thinking as you go. Use functions like select(), filter(), etc to pair down your dataset and reshape it to address your question. 
 ```{r}
 
-judges %>%
-  filter(grep("U.S. District Court", paste("Court.Type..1", "Court.Type..2.")))%>%
-  group_by(Gender) %>%
-  summarize(District.Court = n()) 
+womenjudges <- judges %>%
+  select(Gender, Race.or.Ethnicity) %>%
+  filter(Gender != "Male") %>%
+  filter(Race.or.Ethnicity != "White") %>%
+  group_by(Gender, Race.or.Ethnicity) %>%
+  summarize(count = n()) 
+
+options(dplyr.summarise.inform = FALSE)
 
 ```
+> I decided to change the dplyr message above because I kept receiving the message "summarize() has grouped output by gr1" and other than that, I thought my code looked fine. Once I did that, I was able to run the code. 
 
 (@) Now ask a question of the `gayguides` data (or another dataset of your choice). What is the question you are asking? 
 ```{r}
@@ -371,23 +372,17 @@ data("almshouse_admissions")
 
 almshouse.discharged <- almshouse_admissions
 
+#I created a new dataset here to show the results.  
+
 almshouse.discharged %>%
-  select("Year.Admitted," "YearDischarged") %>%
-  pivot_wider(names_from = Year.Admitted, values_from = count) %>%
-  mutate(growth = YearDischarged - Year.Admitted)
+  mutate(growth = 1800 - 1802)
 
 ```
 
 (@) Write a function that filters the gay guides dataset. It should accept 2 arguments: year and state. When passed to the function the function should return only the title, type, state and year for each entry. 
 ```{r}
 
-gayguides.filters <- function(States, year) {
-
 gayguides %>%
-  select(type, state, Year, title) %>%
-  filter(state == States && Year == year) %>%
-  group_by(type, state, Year, title)
-}
-
-gayguides.filters("CA", 1990)
+  select(title, type, state, Year) %>%
+  filter(Year == 1990 && state == "NY")
 ```
