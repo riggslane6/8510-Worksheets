@@ -2,6 +2,10 @@
 title: 'Worksheet 4: Data Visualization'
 author: "Lane Riggs"
 date: "Feb. 28, 2023"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
 ---
 
 _This is the fourth in a series of worksheets for History 8510 at Clemson University. The goal of these worksheets is simple: practice, practice, practice. The worksheet introduces concepts and techniques and includes prompts for you to practice in this interactive document. When you are finished, you should change the author name (above), knit your document, and upload it to canvas. Don't forget to commit your changes as you go and push to github when you finish the worksheet._
@@ -205,12 +209,19 @@ ggplot(religious.year, aes(x = Year, y = count)) +
 ```{r}
 
 guides.risk <- gayguides %>%
-  filter(grepl("(HOT)" | "(AYOR)", amenityfeatures) | grepl("inquire locally", description) | grepl("inquire locally", streetaddress) | grepl("inquire", title)) %>%
+  filter(grepl("(HOT) | (AYOR)", amenityfeatures) | grepl("inquire locally", description, ignore.case = TRUE) | grepl("inquire locally", streetaddress, ignore.case = TRUE) | grepl("inquire", title, ignore.case = TRUE)) %>%
   group_by(Year) %>%
   summarize(count = n())
 
 #giving me an error saying there's an error in "hot" and "ayor"
 #will return to this 
+
+#I added quotation marks around hot/ayor separately and that was throwing off my code 
+
+ggplot(guides.risk, aes(x = Year, y = count)) +
+  geom_line()
+
+#geom line to show spikes between 1975 and 1985
 ```
 
 
@@ -218,9 +229,9 @@ guides.risk <- gayguides %>%
 Unlike the previous exmaples, `facet_wrap` is not a geom.  It splits the chart window in several small parts (a grid), and displays a similar chart in each section. Each section usually shows the same graph for a specific group of the dataset. For example, remember the line chart above that graphed the number of locations in the `gayguides` data across each year? We can facet that by state to see the number of locations in each state in each year. 
 
 ```{r}
-gg.byyear <- gayguides %>% filter(state == "SC" | state == "NC" | state == "GA") %>% group_by(state, Year) %>% summarize(count = n())
+gg.year <- gayguides %>% filter(state == "SC" | state == "NC" | state == "GA") %>% group_by(state, Year) %>% summarize(count = n())
 
-ggplot(gg.byyear, aes(x = Year, y = count)) +
+ggplot(gg.year, aes(x = Year, y = count)) +
   geom_line() + facet_wrap(~state)
 ```
 
@@ -253,22 +264,18 @@ location.types <- gayguides %>% #create variable
 ggplot(location.types, aes(x = Year, y = type)) +
   geom_line() + facet_wrap(~type)
 
-#I tried to facet wrap Year before type and it was not clear at all what the data was. type is much clearer.
+#I tried to facet wrap Year before type and it was not clear at all what the data was. 
+#type is much clearer.
 
 ```
 
 (@) Using this recreation dataset from last week, can you find the average number of volunteer and paid workers over time? 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 rec.workers <- read.csv("https://github.com/regan008/DigitalMethodsData/blob/main/raw/RecreationData-Wide.csv")
 
-workers.rec <- rec.workers %>%
-  pivot_longer(!city:type_of_worker, names_to = "Year", values_to = "count") %>%
-  pivot_wider(names_from = type_of_worker, values_from = count) %>%
-  mutate(paid.average = mean(c(male.paid, female.paid))) %>%
-  mutate(volunteer_average = mean(c(male.volunteer, women.volunteer, volunteer))) %>%
-  select(city, Year, paid.average, volunteer_average) 
 
 #this isnt working for me right now
+#there's an error with pivot longer
 
 ```
 
@@ -276,20 +283,48 @@ workers.rec <- rec.workers %>%
 In the slots below use the datasets for class (or a dataset of your choice) to create a plot. The plot you create in each of these three examples should try to make some kind of historical observation. After you finish creating the plot, write a short paragraph that explains what kind of observation you were trying to make and what your plot demonstrates. 
 
 (@) Plot 1
-```{r}
+```{r warning=FALSE, include=FALSE}
 
+data("almshouse_admissions")
+
+almhouse.info <- almshouse_admissions %>%
+  select(Year.Admitted, YearDischarged, Last.Name, First.Name) %>%
+  group_by(Year.Admitted, YearDischarged) %>% #group by last name, first name, and when they were discharged
+  summarize(count = n())
+  
+  ggplot(almhouse.info) +
+    geom_line(aes(x = YearDischarged, y = Year.Admitted))
+  
+  #well... I got something to graph! do I understand it? no! does it reflect what I was asking of the data? also no!
 ```
 
 (@) Plot 1 explanation: 
->
+
+>I couldn't get this to work, but I wanted to see the average length of stay at the Almshouse based on the years when people were admitted and when they were discharged. 
+
+>I finally got it to work, but I'm not sure it fully represents what I was looking for.
 
 (@) Plot 2
 ```{r}
 
+data("BostonWomenVoters")
+
+women.data <- BostonWomenVoters %>%
+  select(Precinct, Name, Age, Country.of.Birth) %>%
+  filter(Country.of.Birth == "United States") %>%
+  na.omit() %>%
+  group_by(Precinct, Age) %>% 
+  reframe(Age)
+  
+
+ggplot(women.data) +
+    geom_bar(aes(y = Precinct)) 
+
 ```
 
 (@) Plot 2 explanation: 
->
+
+> I would like to see the average age of women at each precinct from the Boston Women Voter dataset. I'm just not sure how to get that data looking clean and easy to read. From what it's showing, it looks like there was a large number of women voters at Precinct 7, followed by Precinct 8 and then 6. 
 
 (@) Plot 3. For this one, try a different kind of plot. [Check out a useful gallery here.](https://github.com/regan008/DigitalMethodsData/blob/main/raw/RecreationData-Wide.csv)
 (For this week, avoid choosing a map. We'll talk more about maps and geographic data over the next two weeks.)
