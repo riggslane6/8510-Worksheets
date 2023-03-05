@@ -318,7 +318,7 @@ women.data <- BostonWomenVoters %>%
   
 
 ggplot(women.data) +
-    geom_bar(aes(y = Precinct)) 
+    geom_bar(aes(y = Precinct))
 
 ```
 
