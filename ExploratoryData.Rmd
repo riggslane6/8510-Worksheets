@@ -1,0 +1,118 @@
+---
+title: "Exploratory Data Analysis"
+author: "Lane Riggs"
+date: "2023-03-04"
+output: html_document
+---
+  
+>This is going to follow the Exploratory Data Analysis Checklist to explore a dataset for the History 8510 repository
+
+## Exploratory Data Analysis Checklist
+
+```{r}
+library(ggplot2) 
+library(tidyverse)
+library(DigitalMethodsData)
+
+data("UndergroundRR")
+```
+
+##Step 1: Formulate the question 
+
+Which year had the most escapees in the Underground Railroad? 
+
+##Step 2: Read your data 
+```{r} 
+#already did this, but here it is again 
+  data("UndergroundRR")
+```
+
+#Step 3: Check packaging 
+```{r}
+nrow(undergroundRR)
+ncol(undergroundRR)
+```
+
+>The number of rows is 997, the number of columns is 18.
+
+#Step 4: Run str()
+```{r}
+#this is to check the number of classes of the columns and rows
+str(undergroundRR)
+```
+
+>Columns are Last.Name, First.Middle.Name, Alias, Gender, Age, Color, Day, Month, Year, city, County, State... on and on. It is nice that day, month, and year are spread into separate columns of numbers and letters instead of one confusing date (like 05-23-1857).
+
+#Step 5: Look at the top and bottom of the data 
+```{r}
+head(undergroundRR, n=10L)
+```
+
+>We are looking at the first 10 rows here, and we can see that some information is not available and has been marked with NA. A lot of ages are missing and the creator of this dataset chose not to write NA in those columns. 
+
+```{r}
+tail(undergroundRR, n=10L)
+```
+>It looks like there are some notes in the data about figures like William Still, who was the Underground Railroad conductor who took notes of the escapees he helped, that may be harder to read. There are also a lot more NA values for the dates at the end of this dataset. 
+
+#Step 6: Check your "n's"
+```{r}
+#checking the data to see if the reward is formatted the same way 
+table(undergroundRR$Reward)
+```
+>It mostly looks the same, and it seems that a reward of 200 in state is the average. 
+
+````{r}
+table(undergroundRR$Color)
+````
+>Very little is included here. There are two races: Black and what I would assume is Mulatto. There are 288 Black escapees, 100 Mulatto escapees, and 609 unknown escapees. It's interesting to think of the racial categories since Still, a Black man, was compiling this data. 
+
+#Step 7: Validate with at least one external source 
+
+>I decided to check the dates, since I am still familiarizing myself with this dataset at this point. Google says the Underground Railroad was active from 1860 to 1865. The dataset reflects dates of 1854-1860. So Still was actively helping escapees during this time frame.
+
+>There is also a typo of the year 1584 and 156. (Now, this could have been by Still, or this could have been by Nick Sacco. If this was Still's original mistake, I am glad Nick Sacco kept it as it was.)
+
+#Step 8: Try the easy solution
+```{r} 
+#return to the original question
+  
+RRyears <- undergroundRR %>%
+  group_by(Year) %>%
+  summarize(count = n())
+```
+>We can see that 1857 had the most escapees, with 205 escapees. The second most active year is 1856. 
+
+#Step 9: Challenge your solution
+````{r}
+undergroundRR%>%
+ group_by(Last.Name, First.Middle.Name,
+  Alias, Gender, Color, Day, Month, City, County,
+  State, Child, Literate, Armed, Trasportation,
+  Enslaver, Reward, Year) %>%
+  summarise(n = n(), .groups =
+  "drop") %>%
+  filter(n > 1L)
+
+rr.enslaver <- undergroundRR %>%
+  mutate(Year = ifelse(Year == "", NA, Year)) %>%
+  pivot_wider(names_from=Year, values_from=Enslaver)
+
+#graphing it to see how many escapees came from each state. and also to work with charts more. 
+
+barplot(table(undergroundRR$State), col = "black")
+    
+```
+#Step 10: Follow up questions 
+
+1: Do you have the right data? 
+
+>While I did want to take a look at this dataset since we had not worked with it, I could have looked at a different dataset or a dataset that had more variables and rows. However, I think the dataset was perfect for the question I asked, since I was able to easily search the data.
+
+2. Do you need other data?
+
+>It could be beneficial to look at other data about the Undergorund Railroad, specifically dates and rewards. It could also be interesting to view this data alongside the runaway slaves data I looked at a few weeks ago. 
+
+3. Do you have the right question?
+
+>I think I may be on the right track, but that more detailed questioning and more data analysis could refine my question. I may have answered my question, but I don't think I have the necessary context to fully understand the historical significance of the answer. 
