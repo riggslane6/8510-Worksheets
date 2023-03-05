@@ -330,6 +330,8 @@ ggplot(women.data) +
 (For this week, avoid choosing a map. We'll talk more about maps and geographic data over the next two weeks.)
 ```{r}
 
+
+
 ```
 
 (@) Plot 3 explanation: 
