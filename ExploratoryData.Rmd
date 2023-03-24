@@ -21,6 +21,8 @@ data("UndergroundRR")
 
 Which year had the most escapees in the Underground Railroad? 
 
+Revised question: Was there a linear trend?
+
 ##Step 2: Read your data 
 ```{r} 
 #already did this, but here it is again 
@@ -74,14 +76,31 @@ table(undergroundRR$Color)
 >There is also a typo of the year 1584 and 156. (Now, this could have been by Still, or this could have been by Nick Sacco. If this was Still's original mistake, I am glad Nick Sacco kept it as it was.)
 
 #Step 8: Try the easy solution
-```{r} 
+```{r eval=FALSE, warning=FALSE, include=FALSE}
 #return to the original question
   
-RRyears <- undergroundRR %>%
+RR.years <- undergroundRR %>%
   group_by(Year) %>%
   summarize(count = n())
 ```
 >We can see that 1857 had the most escapees, with 205 escapees. The second most active year is 1856. 
+
+```{r} 
+#work on the revised question 
+
+Years <-c(1853, 1854, 1855, 1856, 1857, 1858, 1859, 1860, 1861)
+
+Escapees.Number <- c(69, 126, 165, 181, 205, 100, 62, 43, 1)
+
+plot(Years, Escapees.Number)
+
+yx.lm <- lm(Years ~ Escapees.Number)
+
+lines(Years, predict(yx.lm), col="red")
+
+abline(a = 0, b = 1, lty =2)
+
+```
 
 #Step 9: Challenge your solution
 ````{r}
@@ -102,7 +121,8 @@ rr.enslaver <- undergroundRR %>%
 
 barplot(table(undergroundRR$State), col = "black")
     
-```
+````
+
 #Step 10: Follow up questions 
 
 1: Do you have the right data? 
