@@ -2,6 +2,8 @@
   title: 'Worksheet 5: Mapping'
 author: 'Lane Riggs'
 date: 'March 24, 2023'
+
+#I had lots of difficulties with this worksheet. I could never get sf or rgdal to install properly, but I finally got leaflet to. (I was confused during our meeting: Leaflet Providers is NOT leaflet.) I am going to schedule a meeting with you to find out how to install them correctly! I apologize for all of the unanswered questions! I Googled, slacked, and Googled again but could never get the packages to work. 
 ---
   
 _This is the fifth in a series of worksheets for History 8510 at Clemson University. The goal of these worksheets is simple: practice, practice, practice. The worksheet introduces concepts and techniques and includes prompts for you to practice in this interactive document. When you are finished, you should change the author name (above), knit your document, and upload it to canvas. Don't forget to commit your changes as you go and push to github when you finish the worksheet._
@@ -34,7 +36,10 @@ head(rec.data)
 Notice in this dataset we have the city state and year but no geographical coordinates if we wanted to map this data. Even if we don't have an exact street address, we can still geocode this data to get coordinates. The function to do that is `geocode()` and we can pass it a city and street. Note the method option, which designates which geocoding service we want to use. 
 
 ```{r}
-rec.data.coordinates <- rec.data %>% geocode(city = city, state = state, method='osm', lat = latitude, long = longitude)
+
+rec.data.coordinates <- rec.data %>% 
+  geocode(city = city, state = state, method='osm', lat = latitude, long = longitude)
+
 head(rec.data.coordinates)
 ```
 Now we have latitude and longitude coordinates for our data. 
@@ -60,7 +65,8 @@ Underground.Coordinates %>%
 
 data("BostonWomenVoters")
 
-BostonWomenVoters.Coordinates <- BostonWomenVoters %>% slice(1:500) %>%
+BostonWomenVoters.Coordinates <- BostonWomenVoters %>% 
+  slice(1:500) %>%
   geocode(state = State.or.Province.of.Birth, street = Street.of.Residence.on.April.1, method= 'osm', lat = latitude, long = longitude)
 
 #this is going to take a very long time to load 
@@ -91,7 +97,7 @@ First we need to get a basemap. For this example we'll use the `map_data()` func
 
 > map_data()
 
->This functions gives us access to maps of U.S. counties, states, coasts; countries of France, Italy, and New Zealand; and two versions of the world. The first version of the world map is a low resolution map while the second version of the world map is based in latitudes, so we get to see the Pacific Ocean. 
+>This maps package gives us access to maps of U.S. counties, states, and the continental US; countries like France, Italy, and New Zealand; and a few versions of a world map. The map data package extends the maps package to include datasets from China and Japan, as well. There are two versions of the world map, one is low (mid) resolution, which was imported from the public domain Natural Earth project. Another version of the world map features the Pacific Ocean in the center of the map. 
 
 Lets load the base map data for the US. 
 ```{r}
@@ -99,65 +105,147 @@ usa <- map_data("state")
 ```
 
 (@) `map_data()` generates a data frame. Take a look at this data frame, what types of data are included? 
-
-> 
+ 
+> This data frame shows the longitude and latitude of locations of more than 40 states. States are in the region column. There is a subregion column, but it doesn't have many values. There are some subregions for Michigan and Virginia. Each region has a group number, so some states are in group 1, group 2, etc. These locations have numerical orders. These numerical orders could relate to the longitude and latitude values for each location. 
 
 
 We can now pass this data to ggplot to create a simple basemap. When we wanted to create a bar plot using `ggplot()` we called `geom_bar`. When we wanted to create a line chart we used `geom_point()` and `geom_line()`. The sample principle applies here and `ggplot()` provides a geom for maps.
 ```{r}
+
 ggplot() + 
   geom_map( data = usa, map = usa, aes(long, lat, map_id=region))
+
 ```
 
 Now we have a basemap! But what if we want to layer data onto it. Lets add all of the locations in `gayguides` from 1965. First we need to set up our data: 
 ```{r}
+
 data(gayguides)
+
 gayguides <- gayguides %>% filter(Year == 1965)
+
 ```
 
 And then we can use the same mapping code from above but this time we're going to add an additional geom -- `geom_point()` which will point to each of our locations from 1965. 
 ```{r}
+
 ggplot() + 
   geom_map( data = usa, map = usa, aes(long, lat, map_id=region)) +
   geom_point(data = gayguides, mapping = aes(x=lon, y=lat))
+
 ```
 
 (@) This map looks slightly funny, but that is because the data includes entries outside of the contiguous United States. Try filtering out those entries and mapping this again. Can you change the color or size of the points? Can you add a title?
-  ```{r}
+
+```{r}
+
+gayguides.filter <- gayguides %>%
+  filter(state != "AK" & state != "HI") 
+
+#to filter out states that are not in the contiguous U.S. 
+
+ggplot() +
+  geom_map(data = usa, map = usa, aes(long, lat, map_id= region)) +
+  geom_point(data = gayguides.filter, mapping = aes(x=lon, y=lat, color=type)) +
+  labs(title = "1965 Locations")
+
+#it's a little ugly, but it popped up! 
 
 ```
 
 (@) Can you map just locations in South Carolina (on a basemap of SC)? 
-  ```{r}
 
+```{r}
+
+#working on creating dataframes for South Carolina and South Carolina counties
+
+state.sc <- map_data("state")
+
+south.carolina.locations <- subset(state.sc, region == "South Carolina")
+
+counties <- map_data("county")
+
+south.carolina.counties <- subset(counties, region == "South Carolina")
+
+
+#then filtering gay guides 
+
+gayguides.SC <- gayguides.filter %>%
+  filter(state == "SC")
+
+#create a map 
+
+countyborders.sc <- ggplot(data = south.carolina.locations, mapping = aes(x = long, y = lat, group = group)) +
+  coord_fixed(1.3) +
+  geom_polygon(color = "black", fill = "gray")
+
+map.SC <- gayguides.SC +
+  geom_point(data = gayguides.SC, mapping = aes(x=lon, y=lat, color=type, group=city)) +
+  geom_text_repel(data = gayguides.SC, mapping = aes(x=lon, y=lat, group=city, label=title)) +
+  labs(title = "South Carolina locations")
+
+map.SC
 ```
 
 (@) Create a map that uses your geocoded data from the Boston Women Voters dataset. 
 ```{r}
 
+#create dataframes for specific counties/states
+states <- map_data("state")
+
+massachusetts <- subset(states, region == "massachusetts")
+
+county <- map_data("county")
+
+ma.counties <- subset(county, region == "massachusetts")
+
+#now we need to create a base map of New Hampshire with borders 
+
+base.map <- ggplot(data = massachusetts, mapping = aes(x = long, y = lat, group = group)) +
+  coord_fixed(1.3) +
+  geom_polygon(color = "red", fill = "blue") +
+  geom_polygon(data = ma.counties, fill = NA, color = "white") +
+  geom_polygon(color = "black", fill = NA) 
+
+#Plot these locations on the base map 
+
+massachusetts.map <- base.map +
+  geom_point(data = BostonWomenVoters.Coordinates, mapping = aes(x = longitude, y = latitude, color = Country.of.Birth, group = Street.of.Residence.on.April.1)) +
+  labs(title = "Boston Women Voters Residence")
+
+massachusetts.map
+
+#for some reason this looks very odd. what did I do wrong here? 
 ```
 
 Lets return to the recreational data for a minute.
 
 ```{r}
-head(rec.data.coordinates)
+
+head(rec.data)
+
 ```
 One interesting way to visualize this map might be to plot each location as a point on the map but to use the total_expenditures values to determine the size of the points. 
 
 We can do that by making a small adjustment to the map we made previously. First lets recreate a basic map of all these locations using `ggplot()`
 ```{r}
+
 ggplot() + 
   geom_map( data = usa, map = usa, aes(long, lat, map_id=region)) +
-  geom_point(data = rec.data.coordinates, mapping = aes(x=longitude, y=latitude))
+  geom_point(data = rec.data, mapping = aes(x= longitude, y=latitude))
+
 ```
 
 ```{r}
+
 ggplot() + 
-  geom_map( data = usa, map = usa, aes(long, lat, map_id=region), fill="white", color="gray") +
-  geom_point(data = rec.data.coordinates, mapping = aes(x=longitude, y=latitude, size=total_expenditures))
+  geom_map( data = usa, map = usa, aes(x = long, y = lat, map_id=region), fill="white", color="gray") +
+  geom_point(data = rec.data, mapping = aes(longitude, latitude, size=total_expenditures))
+
 ```
 
 ```{r}
+
 library(readr) #you may have to install it using `install.packages()`. 
 library(rgdal)
 library(sf)
@@ -184,7 +272,8 @@ nhgis <- read_nhgis_sf(
 )
 
 #filter nhgis so that the map focuses on the 48 contiguous states. 
-nhgis <- nhgis %>% filter(STATENAM != "Alaska Territory" & STATENAM != "Hawaii Territory")
+nhgis <- nhgis_data %>% filter(STATENAM != "Alaska Territory" & STATENAM != "Hawaii Territory")
+
 
 #plot 
 ggplot(data = nhgis, aes(fill = AZF001)) +
@@ -192,17 +281,28 @@ ggplot(data = nhgis, aes(fill = AZF001)) +
 
 ```
 (@) In the code above, why filter out Hawaii and Alaska? Try uncommenting that line and rerunning the code. What happens? Why might we want to do this? Why might we not want to do this? How does it shape the interpretation?
-  >
+
+  > When you filter out Hawaii and Alaska, you only get a map of the mainland United States. We might want to not filter out Hawaii and Alaska so that we see a full map of the United States. But we may not want to filter/unfilter if we want a zoomed in map of the United States. It might be hard for someone to visualize the entire United States if Hawaii and Alaska are not included; so data about the entire United States might not be visually represented in a map.
+  
+>I think it could be more helpful if there was a way to visualize Hawaii and Alaska, but have the two in a smaller, separate map, and present all of the data in an easy-to-read, accessible color. 
   
   This is a great start. But using AZF001 (Native born males) as the fill does not create a useful visualization. It doesn't give us a sense of the proportion of that data. What would be much better, is if we knew what percentage of the total population foreign born males represented. To get that we have to calculate it. The next few questions will walk build on the code above and walk you through doing this.
 
 (@) First, create a variable called total_male_pop, with the total foreign and native born male population by summing the variables AZF001 and AZF003. 
 ```{r}
 
+total_male_pop <- nhgis_data %>%
+  rowwise() %>%
+  mutate(total_male_pop = sum(c(AZF001, AZF003)))
+  
 ```
 
-(@) Now, use the total_male_pop variable and create a variable for the the percentage of foreign born males.
+(@) Now, use the total_male_pop variable and create a variable for the percentage of foreign born males.
 ```{r}
+
+total_male_pop <- nhgis_data %>%
+  rowwise() %>%
+  mutate(foreign_males = round(AZF003/total_male_pop), digits = 3)
 
 ```
 
@@ -210,11 +310,14 @@ ggplot(data = nhgis, aes(fill = AZF001)) +
 
 Before you write that code, look up the documentation for the above code (and look at the examples). What does it do? 
 
->
+> Scale fill continuous is a color scale that ggplot uses where data values can be mapped. With the percentage, we have a variable that goes up to 60%. So, if we were to map this, the colors would be in a gradient from 0 to 60% rather than separate colors.  
 
 Now create the map: 
-```{r}
+```{r warning=TRUE}
 
+ggplot(data=nhgis_data, aes(fill = foreign_male)) +
+  geom_sf()
+  scale_fill_continuous()
 ```
 
 ### Leaflet
@@ -238,18 +341,29 @@ my.map %>% addTiles() %>% addMarkers(lng=-82.836856, lat=34.678286, popup = "Har
 
 We could also do this with a data frame. Notice that in this example, we use the leaflet function and call the data inside rather than passing the function coordinates manually. We then use the paste function to build out text for a pop up.
 ```{r}
-leaflet(data=rec.data.coordinates) %>% addTiles() %>% addMarkers(~longitude, ~latitude, popup = paste("The total expenditures in ", rec.data.coordinates$city, ", ", rec.data.coordinates$state, " were ",  rec.data.coordinates$total_expenditures, sep=""))
+leaflet(data=rec.data) %>% addTiles() %>% addMarkers(~longitude, ~latitude, popup = paste("The total expenditures in ", rec.data$city, ", ", rec.data$state, " were ",  rec.data$total_expenditures, sep=""))
 ```
 
 
 (@) Use leaflet to map a dataset of your choice: 
 ```{r}
 
+undergroundRR.data <- Underground.Coordinates %>%
+  filter(!is.na(Year))
+
+leaflet(data = undergroundRR.data) %>%
+  addMarkers(~longitude, ~latitude, popup = paste(undergroundRR.data$City, ", ", undergroundRR.data$State, " in ")) %>%
+  addTiles()
+
+#finally got leaflet to work!! Yay!! 
+
 ```
 
 (@) Explain what choices you made in building this map? Why might you use leaflet over ggplot? When would ggplot be more desirable? 
 
->
+> I decided to look at cities and states from the Underground Railroad dataset to see where enslaved peoples escaped using the railroad. I wanted to look at the railroad dataset since I think we look at the gay guides a lot, and I wanted to use a dataset that we haven't worked with as much. 
+
+>I think ggplot would be more desirable if there was a lot of data and you didn't want to pinpoint the data to specific spots. ggplot could also help you if you wanted to visualize your data in other ways, and not just in maps. 
 
 
 ### Exercises
@@ -257,4 +371,23 @@ For the next portion of this worksheet I'd like you to look back at the email ab
 
 ```{r}
 parks <- read.csv("https://raw.githubusercontent.com/regan008/DigitalMethodsData/main/raw/parks-geocoded.csv")
+```
+
+```{r}
+
+parks.regions <- parks %>%
+  mutate(region = case_when(country %in% parks ~ "Europe", 
+                            country == "United Kingdom" ~ "United Kingdom", 
+                            country == "Canada" ~ "Canada",
+                            country == "South Africa" ~ "South Africa"))
+
+parks.regions %>%
+  group_by(region, year, geoAddress) %>%
+  ggplot(aes(x = year, y = geoAddress, color = region, size = total_sq_kilometers)) +
+  geom_point() +
+  ggtitle("Park Size")
+
+#I could not get this to work perhaps because of dev.controls. Again, this may be an issue related to rgdal or sf. I'm sorry I couldn't do as much as others! 
+
+
 ```
