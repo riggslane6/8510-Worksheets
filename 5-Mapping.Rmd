@@ -1,22 +1,25 @@
 ---
-  title: 'Worksheet 5: Mapping'
+output:
+  pdf_document: default
+  html_document: default
+---
+title: 'Worksheet 5: Mapping'
 author: 'Lane Riggs'
 date: 'March 24, 2023'
-
-#I had lots of difficulties with this worksheet. I could never get sf or rgdal to install properly, but I finally got leaflet to. (I was confused during our meeting: Leaflet Providers is NOT leaflet.) I am going to schedule a meeting with you to find out how to install them correctly! I apologize for all of the unanswered questions! I Googled, slacked, and Googled again but could never get the packages to work. 
 ---
-  
+
+>I had lots of difficulties with this worksheet. I could never get sf or rgdal to install properly, but I finally got leaflet to. (I was confused during our meeting: Leaflet Providers is NOT leaflet.) I am going to schedule a meeting with you to find out how to install them correctly! I apologize for all of the unanswered questions! I Googled, slacked, and Googled again but could never get the packages to work. 
+
 _This is the fifth in a series of worksheets for History 8510 at Clemson University. The goal of these worksheets is simple: practice, practice, practice. The worksheet introduces concepts and techniques and includes prompts for you to practice in this interactive document. When you are finished, you should change the author name (above), knit your document, and upload it to canvas. Don't forget to commit your changes as you go and push to github when you finish the worksheet._
 
 ## Mapping with `ggmap()` and `ggplot2()`
 
 There are many different mapping packages for R. That means there is no single way to create a map in R. Different packages have different strengths and weaknesses and your use of them will depend on your goals and the historical questions you would like to ask. If your project is highly map centric - it may be better suited to ArcGIS which we will not cover in this class. 
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE}
 library(ggplot2) 
 library(tidyverse)
 library(DigitalMethodsData)
-library(ggmap)
 library(tidygeocoder)
 ```
 
